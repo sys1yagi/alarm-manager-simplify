@@ -6,6 +6,8 @@ Handling of AlarmManager's complicated. PendingIntent, WakefulBroadcastReceiver,
 
 ## Architecture
 
+<img src="https://raw.githubusercontent.com/sys1yagi/alarm-manager-simplify/master/art/architecture.png" width="500px"/>
+
 ## How to use
 
 
