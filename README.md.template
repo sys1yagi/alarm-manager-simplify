@@ -1,7 +1,7 @@
 # Alarm Manager Simplify
 
 Alarm Manager Simplify is a code generation library to simplify the code for AlarmManager on Android.
- 
+
 Handling of AlarmManager's complicated. PendingIntent, WakefulBroadcastReceiver, IntentService...
 
 ## Architecture
