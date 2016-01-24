@@ -1,7 +1,7 @@
 # Alarm Manager Simplify
 
 Alarm Manager Simplify is a code generation library to simplify the code for AlarmManager on Android.
- 
+
 Handling of AlarmManager's complicated. PendingIntent, WakefulBroadcastReceiver, IntentService...
 
 ## Architecture
@@ -10,8 +10,41 @@ Handling of AlarmManager's complicated. PendingIntent, WakefulBroadcastReceiver,
 
 ## How to use
 
+### Implement AlarmProcessor and add annotation
 
+```java
+@AlarmName("SimpleAction")
+public class SimpleActionProcessor implements AlarmProcessor {
+  @Override
+  public void process(Context context, Intent intent) {
+    Log.d("SimpleAction", "SimpleAction do");
+  }
+}
+```
 
+```java
+SimpleActionProcessorScheduler.scheduleRtcWakeup(context, 1000);
+```
+
+```java
+public class SimpleActionProcessorScheduler {
+
+    public static void scheduleRtcWakeup(Context context, int target) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        Calendar now = Calendar.getInstance();
+        now.add(Calendar.MILLISECOND, target);
+
+        Intent intent = new Intent(context, SimplifiedAlarmReceiver.class);
+        intent.putExtra("event", "SimpleAction");
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, intent, 0);
+        alarmManager.cancel(pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, now.getTimeInMillis(), pendingIntent);
+    }
+
+    //...
+}
+```
 
 ### Installation
 
