@@ -14,13 +14,13 @@ public class SimpleActionAlarmProcessorScheduler {
         try {
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(context,
-                    Class.forName("com.sys1yagi.android.alarmmanagersimplify.SimplifiedAlarmReceiver"));
+                    Class.forName("com.sys1yagi.android.alarmmanagersimplify.sample.simplify.SimplifiedAlarmReceiver"));
             intent.putExtra("event", "SimpleAction");
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, intent, 0);
             alarmManager.cancel(pendingIntent);
             alarmManager.set(AlarmManager.RTC_WAKEUP, TimeController.millisAfter(interval), pendingIntent);
         } catch (ClassNotFoundException e) {
-            new IllegalStateException(e);
+            throw new IllegalStateException(e);
         }
     }
 }

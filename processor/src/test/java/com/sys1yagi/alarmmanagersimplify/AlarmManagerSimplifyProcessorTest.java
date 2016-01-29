@@ -14,7 +14,7 @@ import static com.google.testing.compile.JavaSourceSubjectFactory.javaSource;
 
 public class AlarmManagerSimplifyProcessorTest {
 
-    JavaFileObject readProcessor(String fileName, String className) {
+    JavaFileObject readClass(String fileName, String className) {
         String javaFile = AssetsUtils.readString(fileName);
 
         return JavaFileObjects
@@ -24,7 +24,7 @@ public class AlarmManagerSimplifyProcessorTest {
     @Test
     public void invalidClass() throws Exception {
         assert_().about(javaSource())
-                .that(readProcessor("InvalidTestProcessor.java", "TestProcessor"))
+                .that(readClass("InvalidTestProcessor.java", "TestProcessor"))
                 .processedWith(new AlarmManagerSimplifyProcessor())
                 .failsToCompile()
                 .withErrorContaining(
@@ -34,12 +34,15 @@ public class AlarmManagerSimplifyProcessorTest {
     @Test
     public void simpleAction() throws Exception {
         assert_().about(javaSource())
-                .that(readProcessor("SimpleActionAlarmProcessor.java", "SimpleActionAlarmProcessor"))
+                .that(readClass("SimpleActionAlarmProcessor.java", "SimpleActionAlarmProcessor"))
                 .processedWith(new AlarmManagerSimplifyProcessor())
                 .compilesWithoutError()
                 .and()
-                .generatesSources(readProcessor("expected/SimpleActionAlarmProcessorScheduler.expected",
-                        "SimpleActionAlarmProcessorScheduler"));
+                .generatesSources(
+                        readClass("expected/SimpleActionAlarmProcessorScheduler.expected",
+                                "SimpleActionAlarmProcessorScheduler"),
+                        readClass("expected/SimplifiedAlarmReceiver.expected",
+                                "SimplifiedAlarmReceiver"));
     }
 
 
