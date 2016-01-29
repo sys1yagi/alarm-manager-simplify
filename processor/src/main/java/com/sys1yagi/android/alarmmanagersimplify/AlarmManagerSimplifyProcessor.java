@@ -40,16 +40,25 @@ public class AlarmManagerSimplifyProcessor extends AbstractProcessor {
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment env) {
         try {
             List<AlarmManagerSimplifyModel> models = EnvParser.parse(env, elementUtils);
-            for (AlarmManagerSimplifyModel model : models) {
+            // Generate SimplifyAlarmReceiver, SimplifyAlarmService
+            SimplifyWriter simplifyWriter = new SimplifyWriter(processingEnv, models);
+            try {
+                simplifyWriter.write(filer);
+            } catch (IOException e) {
+                messager.printMessage(Diagnostic.Kind.ERROR, e.getMessage());
+            }
+
+            // Generate AlarmProcessorScheduler
+            models.forEach(model -> {
                 {
-                    AlarmManagerSimplifyWriter writer = new AlarmManagerSimplifyWriter(processingEnv, model);
+                    AlarmProcessorSchedulerWriter writer = new AlarmProcessorSchedulerWriter(processingEnv, model);
                     try {
                         writer.write(filer);
                     } catch (IOException e) {
                         messager.printMessage(Diagnostic.Kind.ERROR, e.getMessage());
                     }
                 }
-            }
+            });
         } catch (com.sys1yagi.android.alarmmanagersimplify.exception.IllegalTypeException e) {
             error(e.getMessage());
             return false;
