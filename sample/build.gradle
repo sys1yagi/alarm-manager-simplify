@@ -22,8 +22,7 @@ android {
 
 dependencies {
     compile project(':library')
-//    apt project(':processor')
-
+    apt project(':processor')
 
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.+'

@@ -16,9 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <receiver android:name=".simplify.SimplifiedAlarmReceiver"
+        <receiver android:name="com.sys1yagi.android.alarmmanagersimplify.SimplifiedAlarmReceiver"
                   android:exported="false"/>
-        <service android:name=".simplify.SimplifiedAlarmService"
+        <service android:name="com.sys1yagi.android.alarmmanagersimplify.SimplifiedAlarmService"
                  android:exported="false"/>
     </application>
 

@@ -1,6 +1,5 @@
 package com.sys1yagi.android.alarmmanagersimplify.sample;
 
-
 import com.sys1yagi.android.alarmmanagersimplify.sample.alarm.SimpleActionAlarmProcessorScheduler;
 
 import android.os.Bundle;

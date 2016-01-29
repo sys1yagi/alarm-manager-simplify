@@ -42,7 +42,10 @@ public class AlarmManagerSimplifyProcessorTest {
                         readClass("expected/SimpleActionAlarmProcessorScheduler.expected",
                                 "SimpleActionAlarmProcessorScheduler"),
                         readClass("expected/SimplifiedAlarmReceiver.expected",
-                                "SimplifiedAlarmReceiver"));
+                                "SimplifiedAlarmReceiver"),
+                        readClass("expected/SimplifiedAlarmService.expected",
+                                "SimplifiedAlarmService")
+                );
     }
 
 
