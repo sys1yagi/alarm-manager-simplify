@@ -16,6 +16,7 @@ import javax.lang.model.util.Elements;
 public class EnvParser {
 
     public static List<AlarmManagerSimplifyModel> parse(RoundEnvironment env, Elements elementUtils) {
+
         ArrayList<AlarmManagerSimplifyModel> models = new ArrayList<>();
         ArrayList<Element> elements = new ArrayList<>(
                 env.getElementsAnnotatedWith(Simplify.class));
@@ -24,11 +25,11 @@ public class EnvParser {
             models.add(model);
         }
 
-        validateFragmentCreatorModel(models);
+        validateAlarmProcessorModel(models);
         return models;
     }
 
-    public static void validateFragmentCreatorModel(List<AlarmManagerSimplifyModel> models) {
+    public static void validateAlarmProcessorModel(List<AlarmManagerSimplifyModel> models) {
         models.forEach(model -> {
             List<? extends TypeMirror> interfaces = model.getElement().getInterfaces();
             for (TypeMirror i : interfaces) {
