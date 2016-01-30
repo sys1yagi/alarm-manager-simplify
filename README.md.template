@@ -28,10 +28,14 @@ public class SimpleActionProcessor implements AlarmProcessor {
 
 
 ```xml
-<receiver android:name="com.sys1yagi.android.alarmmanagersimplify.SimplifiedAlarmReceiver"
+<uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+<application>
+  <receiver android:name="com.sys1yagi.android.alarmmanagersimplify.SimplifiedAlarmReceiver"
           android:exported="false"/>
-<service android:name="com.sys1yagi.android.alarmmanagersimplify.SimplifiedAlarmService"
+  <service android:name="com.sys1yagi.android.alarmmanagersimplify.SimplifiedAlarmService"
          android:exported="false"/>
+</application>
 ```
 
 ### Schedule alarm.
