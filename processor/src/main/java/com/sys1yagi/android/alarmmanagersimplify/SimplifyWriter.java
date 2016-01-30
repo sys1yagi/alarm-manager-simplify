@@ -6,7 +6,6 @@ import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeSpec;
-import com.sys1yagi.android.alarmmanagersimplify.annotation.Simplify;
 
 import android.app.Activity;
 import android.app.IntentService;
@@ -126,11 +125,10 @@ public class SimplifyWriter {
 
         builder.addStatement("$T processor", ClassName.get(AlarmProcessor.class));
         models.forEach(model -> {
-            Simplify simplify = model.getElement().getAnnotation(Simplify.class);
             builder
                     .addStatement("processor = new $T()", ClassName.get(model.getElement()))
                     .addStatement("processors.add(processor)")
-                    .addStatement("processingMap.put(processor, $S)", simplify.value());
+                    .addStatement("processingMap.put(processor, $S)", model.getSimplify().value());
         });
 
         return builder.build();

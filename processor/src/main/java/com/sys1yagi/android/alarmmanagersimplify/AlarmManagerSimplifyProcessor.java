@@ -3,6 +3,7 @@ package com.sys1yagi.android.alarmmanagersimplify;
 import com.google.auto.service.AutoService;
 
 import com.sys1yagi.android.alarmmanagersimplify.annotation.Simplify;
+import com.sys1yagi.android.alarmmanagersimplify.exception.IllegalTypeException;
 
 import java.io.IOException;
 import java.util.LinkedHashSet;
@@ -59,7 +60,7 @@ public class AlarmManagerSimplifyProcessor extends AbstractProcessor {
                     }
                 }
             });
-        } catch (com.sys1yagi.android.alarmmanagersimplify.exception.IllegalTypeException e) {
+        } catch (IllegalTypeException e) {
             error(e.getMessage());
             return false;
         }

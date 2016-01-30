@@ -2,12 +2,8 @@ package com.sys1yagi.android.alarmmanagersimplify;
 
 import com.sys1yagi.android.alarmmanagersimplify.annotation.Simplify;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.Elements;
 
 public class AlarmManagerSimplifyModel {
@@ -20,7 +16,7 @@ public class AlarmManagerSimplifyModel {
 
     private String schedulerClassName;
 
-    private List<VariableElement> processorList = new ArrayList<>();
+    private Simplify simplify;
 
     public AlarmManagerSimplifyModel(TypeElement element, Elements elementUtils) {
         this.element = element;
@@ -31,13 +27,11 @@ public class AlarmManagerSimplifyModel {
     }
 
     private void findAnnotations(Element element) {
-        for (Element enclosedElement : element.getEnclosedElements()) {
-            findAnnotations(enclosedElement);
-
-            Simplify simplify = enclosedElement.getAnnotation(Simplify.class);
-            if (simplify != null) {
-                this.processorList.add((VariableElement) enclosedElement);
-            }
+        Simplify simplify = element.getAnnotation(Simplify.class);
+        if (simplify != null) {
+            this.simplify = simplify;
+        } else {
+            throw new IllegalStateException("@Simplify not found : " + element.toString());
         }
     }
 
@@ -66,7 +60,7 @@ public class AlarmManagerSimplifyModel {
         return schedulerClassName;
     }
 
-    public List<VariableElement> getProcessorList() {
-        return processorList;
+    public Simplify getSimplify() {
+        return simplify;
     }
 }
