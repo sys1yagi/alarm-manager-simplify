@@ -18,15 +18,20 @@ public class EnvParser {
     public static List<AlarmManagerSimplifyModel> parse(RoundEnvironment env, Elements elementUtils) {
 
         ArrayList<AlarmManagerSimplifyModel> models = new ArrayList<>();
-        ArrayList<Element> elements = new ArrayList<>(
-                env.getElementsAnnotatedWith(Simplify.class));
+        ArrayList<Element> elements = new ArrayList<>(env.getElementsAnnotatedWith(Simplify.class));
         for (Element element : elements) {
-            AlarmManagerSimplifyModel model = new AlarmManagerSimplifyModel((TypeElement) element, elementUtils);
-            models.add(model);
+            if (isValidElement(element)) {
+                AlarmManagerSimplifyModel model = new AlarmManagerSimplifyModel((TypeElement) element, elementUtils);
+                models.add(model);
+            }
         }
 
         validateAlarmProcessorModel(models);
         return models;
+    }
+
+    private static boolean isValidElement(Element element) {
+        return element.getAnnotation(Simplify.class) != null;
     }
 
     public static void validateAlarmProcessorModel(List<AlarmManagerSimplifyModel> models) {

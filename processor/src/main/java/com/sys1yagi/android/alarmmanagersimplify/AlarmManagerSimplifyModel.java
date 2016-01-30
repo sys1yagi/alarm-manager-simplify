@@ -23,10 +23,10 @@ public class AlarmManagerSimplifyModel {
         this.packageName = getPackageName(elementUtils, element);
         this.originalClassName = getClassName(element, packageName);
         this.schedulerClassName = originalClassName.concat("Scheduler");
-        findAnnotations(element);
+        findAnnotations(element, elementUtils);
     }
 
-    private void findAnnotations(Element element) {
+    private void findAnnotations(Element element, Elements elementUtils) {
         Simplify simplify = element.getAnnotation(Simplify.class);
         if (simplify != null) {
             this.simplify = simplify;
