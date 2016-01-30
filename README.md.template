@@ -1,5 +1,7 @@
 # Alarm Manager Simplify
 
+[![Circle CI](https://circleci.com/gh/sys1yagi/alarm-manager-simplify.svg?style=svg)](https://circleci.com/gh/sys1yagi/alarm-manager-simplify)
+
 Alarm Manager Simplify is a code generation library to simplify the code for AlarmManager on Android.
 
 Handling of AlarmManager's complicated. PendingIntent, WakefulBroadcastReceiver, IntentService...
@@ -13,7 +15,7 @@ Handling of AlarmManager's complicated. PendingIntent, WakefulBroadcastReceiver,
 ### Implement AlarmProcessor and add annotation
 
 ```java
-@AlarmName("SimpleAction")
+@Simplify("SimpleAction")
 public class SimpleActionProcessor implements AlarmProcessor {
   @Override
   public void process(Context context, Intent intent) {
@@ -22,28 +24,22 @@ public class SimpleActionProcessor implements AlarmProcessor {
 }
 ```
 
-```java
-SimpleActionProcessorScheduler.scheduleRtcWakeup(context, 1000);
+### Add to AndroidManifest.xml
+
+
+```xml
+<receiver android:name="com.sys1yagi.android.alarmmanagersimplify.SimplifiedAlarmReceiver"
+          android:exported="false"/>
+<service android:name="com.sys1yagi.android.alarmmanagersimplify.SimplifiedAlarmService"
+         android:exported="false"/>
 ```
 
+### Schedule alarm.
+
+Set up a alarm using generated Scheduler.
+
 ```java
-public class SimpleActionProcessorScheduler {
-
-    public static void scheduleRtcWakeup(Context context, int target) {
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-
-        Calendar now = Calendar.getInstance();
-        now.add(Calendar.MILLISECOND, target);
-
-        Intent intent = new Intent(context, SimplifiedAlarmReceiver.class);
-        intent.putExtra("event", "SimpleAction");
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, intent, 0);
-        alarmManager.cancel(pendingIntent);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, now.getTimeInMillis(), pendingIntent);
-    }
-
-    //...
-}
+SimpleActionProcessorScheduler.scheduleRtcWakeup(context, 1000);
 ```
 
 ### Installation
@@ -51,7 +47,8 @@ public class SimpleActionProcessorScheduler {
 This library is distributed by [JitPack](https://jitpack.io/). Add dependencies your build.gradle
 
 ```
-TODO
+apt 'com.github.sys1yagi.fragment-creator:processor:%%version%%'
+compile 'com.github.sys1yagi.fragment-creator:library:%%version%%'
 ```
 
 ## Development

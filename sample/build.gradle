@@ -21,11 +21,15 @@ android {
 }
 
 dependencies {
-    compile project(':library')
-    apt project(':processor')
+    // for development
+    // compile project(':library')
+    // apt project(':processor')
+
+    compile 'com.github.sys1yagi.alarm-manager-simplify:library:0.2.0'
+    apt 'com.github.sys1yagi.alarm-manager-simplify:processor:0.2.0'
 
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.+'
+    compile 'com.android.support:appcompat-v7:23.1.1'
     testCompile 'junit:junit:4.12'
     testCompile 'org.powermock:powermock-module-junit4:1.6.2'
     testCompile 'org.powermock:powermock-module-junit4-rule:1.6.2'
