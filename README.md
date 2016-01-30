@@ -47,8 +47,8 @@ SimpleActionProcessorScheduler.scheduleRtcWakeup(context, 1000);
 This library is distributed by [JitPack](https://jitpack.io/). Add dependencies your build.gradle
 
 ```
-apt 'com.github.sys1yagi.fragment-creator:processor:0.2.0'
-compile 'com.github.sys1yagi.fragment-creator:library:0.2.0'
+apt 'com.github.sys1yagi.alarm-manager-simplify:processor:0.2.0'
+compile 'com.github.sys1yagi.alarm-manager-simplify:library:0.2.0'
 ```
 
 ## Development
