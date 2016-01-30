@@ -1,5 +1,7 @@
 # Alarm Manager Simplify
 
+[![Circle CI](https://circleci.com/gh/sys1yagi/alarm-manager-simplify.svg?style=svg)](https://circleci.com/gh/sys1yagi/alarm-manager-simplify)
+
 Alarm Manager Simplify is a code generation library to simplify the code for AlarmManager on Android.
 
 Handling of AlarmManager's complicated. PendingIntent, WakefulBroadcastReceiver, IntentService...
